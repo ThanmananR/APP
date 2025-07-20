@@ -3,12 +3,12 @@ import pandas as pd
 import joblib
 
 # Load trained model
-model = joblib.load("JOB_CHANGE.pkl")
+model = joblib.load('JOB_CHANGE.pkl')
 
 # Page config
 st.set_page_config(page_title="Job Switch Prediction", page_icon="🧑‍💼", layout="centered")
 
-# Styling
+# Styling for full page
 st.markdown("""
     <style>
     .stApp {
@@ -73,25 +73,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# UI Header
+# Full box: header + input title + inputs
 st.markdown("""
     <div class="title-box">
         <div class="title-text">🚀 AI-powered Career Prediction System 🚀</div>
         <div class="subtitle-text">Built with Machine Learning for smarter job predictions</div>
         <div class="subtitle-text">Project by Lognath, Thanmanan, Rithick</div>
         <div class="input-title">Enter Candidate Details:</div>
-    </div>
 """, unsafe_allow_html=True)
 
-# Inputs
+# Inputs start inside the same box
 commute_time = st.number_input("🚗 Commute Time (in minutes)", min_value=0, max_value=300, value=30)
-job_satisfaction = st.selectbox("😊 Job Satisfaction Level", [1, 2, 3, 4, 5])
+job_satisfaction = st.selectbox("😊 Job Satisfaction Level", [1, 2, 3, 4, 5], help="1=Excellent, 3=Average, 5=Very Bad")
 years_in_current_job = st.number_input("📅 Number of Years in Current Job", min_value=0, max_value=50, value=2)
 salary_expectation = st.number_input("💰 Salary Expectation (₹)", min_value=0, max_value=1000000, value=20000)
 wlb_input = st.selectbox("⚖️ Work-Life Balance (WLB)", ["Yes", "No"])
 wlb = 1 if wlb_input == "Yes" else 0
 
-# Prepare data
+# Close the white box div
+st.markdown("</div>", unsafe_allow_html=True)
+
+# Prepare input
 input_data = pd.DataFrame({
     "COMMUTE TIME? (note : in minutes)": [commute_time],
     "JOB SATISFACTION LEVEL (1-EXCELLENT,3-AVERAGE,5-VERY BAD)": [job_satisfaction],
@@ -100,10 +102,12 @@ input_data = pd.DataFrame({
     "WLB": [wlb]
 })
 
+input_array = input_data.to_numpy()
+
 # Predict button
 if st.button("🎯 Predict Job Switch"):
-    prediction = model.predict(input_data)
-    prediction_proba = model.predict_proba(input_data)
+    prediction = model.predict(input_array)
+    prediction_proba = model.predict_proba(input_array)
 
     if prediction[0] == 1:
         st.success("✅ The candidate is likely to switch jobs.")
@@ -112,11 +116,11 @@ if st.button("🎯 Predict Job Switch"):
         st.info("❌ The candidate is unlikely to switch jobs.")
         st.snow()
 
-    st.write("**Probability of switching:** {:.2f}%".format(prediction_proba[0][1] * 100))
+    st.write("**Probability of switching:** {:.2f}%".format(prediction_proba[0][1]*100))
 
-# Footer Banner
+# Running banner at full width
 st.markdown("""
     <div class="banner">
-        <div class="banner-text"> ❤️PROJECT DONE BY Lognath, Thanmanan, Rithick ❤️   🚀PROJECT DONE BY Lognath, Thanmanan, Rithick 🚀</div>
+        <div class="banner-text"> ❤️PROJECT DONE BY Lognath, Thanmanan, Rithick ❤️                                                  🚀PROJECT DONE BY Lognath, Thanmanan, Rithick 🚀</div>
     </div>
 """, unsafe_allow_html=True)
