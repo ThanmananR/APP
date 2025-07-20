@@ -78,7 +78,7 @@ st.markdown("""
     <div class="title-box">
         <div class="title-text">🚀 AI-powered Career Prediction System 🚀</div>
         <div class="subtitle-text">Built with Machine Learning for smarter job predictions</div>
-        <div class="subtitle-text">Project by Thanmanan</div>
+        <div class="subtitle-text">Project by Lognath, Thanmanan, Rithick</div>
         <div class="input-title">Enter Candidate Details:</div>
 """, unsafe_allow_html=True)
 
@@ -121,6 +121,6 @@ if st.button("🎯 Predict Job Switch"):
 # Running banner at full width
 st.markdown("""
     <div class="banner">
-        <div class="banner-text"> ❤️PROJECT DONE BY Thanmanan❤️                                                  🚀PROJECT DONE BY Lognath, Thanmanan, Rithick 🚀</div>
+        <div class="banner-text"> ❤️PROJECT DONE BY Lognath, Thanmanan, Rithick ❤️                                                  🚀PROJECT DONE BY Lognath, Thanmanan, Rithick 🚀</div>
     </div>
 """, unsafe_allow_html=True)
