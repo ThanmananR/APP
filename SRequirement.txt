@@ -1,0 +1,6 @@
+streamlit
+tortoise-tts
+torchaudio
+torch
+numpy
+scipy
